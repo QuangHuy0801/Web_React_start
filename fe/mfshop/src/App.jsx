@@ -9,6 +9,8 @@ import Blog from './components/Blog';
 import Contact from './components/Contact';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import MyProfile from './components/MyProfile';
+import History from './components/History';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function AppContent() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/myprofile" element={<MyProfile />} />
+        <Route path="/myhistory" element={<History />} />
       </Routes>
       {!isSignInPage && <FooterComponent />}
     </>

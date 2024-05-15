@@ -18,17 +18,6 @@ export const forgotPassword = (username) => {
     });
 };
 
-const ResetPassword = "/forgot";
-export const resetPassword = (username) => {
-    const params = new URLSearchParams();
-    params.append('id', username);
-
-    return axios.post(`${BASE_URL}${ResetPassword}`, params, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    });
-};
 
 const SignUp = "/signup";
 export const signUp = (username, fullname, email, password) => {
@@ -39,6 +28,20 @@ export const signUp = (username, fullname, email, password) => {
     params.append('password', password);
 
     return axios.post(`${BASE_URL}${SignUp}`, params, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+};
+
+const FORGOT_NEW_PASS_ENDPOINT = "/forgotnewpass";
+export const forgotNewPass = (id, code, password) => {
+    const params = new URLSearchParams();
+    params.append('id', id);
+    params.append('code', code);
+    params.append('password', password);
+
+    return axios.post(`${BASE_URL}${FORGOT_NEW_PASS_ENDPOINT}`, params, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }

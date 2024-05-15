@@ -6,7 +6,7 @@ const blProductAPI = "/bestsellers";
 export const listbsProduct = () => axios.get(`${BASE_URL}${blProductAPI}`);
 const ProductAPI = "/product";
 export const listProduct = () => axios.get(`${BASE_URL}${ProductAPI}`);
-const SearchAPI = "/Search";
+const SearchAPI = "/search";
 export const listProductSearch = (searchContent) => {
     const url = `${BASE_URL}${SearchAPI}?searchContent=${searchContent}`;
     return axios.get(url);

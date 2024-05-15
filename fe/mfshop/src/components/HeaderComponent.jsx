@@ -1,11 +1,18 @@
-import { useLocation } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 
 const HeaderComponent = () => {
   const location = useLocation();
-
-  // Tạo một hàm để kiểm tra xem liên kết nào nên được đánh dấu là active
+  const navigate = useNavigate(); 
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  console.log(user);
+  const userName = user ? user.user_Name : null;
+  const cartSize = user && user.cart ? user.cart.length : 0;
   const isActiveLink = (path) => {
     return location.pathname === path ? 'active' : '';
+  };
+  const handleSignOut = () => {
+    sessionStorage.removeItem('user');
+    navigate('/signin'); 
   };
 
 
@@ -21,10 +28,17 @@ const HeaderComponent = () => {
             </div>
             <div className="col-lg-6 col-md-5">
               <div className="header__top__right">
-                <div className="header__top__links">
-                  <a href="/signin">Sign in</a>
-                  <a href="#">FAQs</a>
-                </div>
+              <div className="header__top__links">
+            {user ? (
+              <>
+                <a href="/profile">{userName}</a>
+                <a href="#" onClick={handleSignOut}>Sign out</a>
+              </>
+            ) : (
+              <a href="/signin">Sign in</a>
+            )}
+            <a href="#">FAQs</a>
+          </div>
                 <div className="header__top__hover">
                   <span>Usd <i className="arrow_carrot-down"></i></span>
                   <ul>
@@ -67,7 +81,7 @@ const HeaderComponent = () => {
             <div className="header__nav__option">
               <a href="#" className="search-switch"><img src="/img/icon/search.png" alt="" /></a>
               <a href="#"><img src="/img/icon/heart.png" alt="" /></a>
-              <a href="/cart"><img src="/img/icon/cart.png" alt="" /> <span>0</span></a>
+              <a href="/cart"><img src="/img/icon/cart.png" alt="" /> <span>{cartSize}</span></a>
             </div>
           </div>
         </div>

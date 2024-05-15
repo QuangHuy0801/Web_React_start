@@ -12,7 +12,6 @@ const Home = () => {
     const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
     useEffect(() => {
-        // Thời điểm kết thúc của ưu đãi (ví dụ: 3 ngày, 1 giờ, 50 phút và 18 giây sau khi trang được tải)
         const endTime = new Date();
         endTime.setDate(endTime.getDate() + 3);
         endTime.setHours(endTime.getHours() + 1);
