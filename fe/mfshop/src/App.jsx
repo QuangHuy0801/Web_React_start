@@ -11,6 +11,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import MyProfile from './components/MyProfile';
 import History from './components/History';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function AppContent() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/myhistory" element={<History />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       {!isSignInPage && <FooterComponent />}
     </>

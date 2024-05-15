@@ -18,7 +18,7 @@ const History = () => {
     };
 
     fetchOrders();
-  }, [user.id]); // Trigger useEffect when user.id changes
+  }, [user.id]); 
 
   return (
     <div className="container-fluid mt-5 mb-5" style={{ padding: '0 200px 100px 200px' }}>
