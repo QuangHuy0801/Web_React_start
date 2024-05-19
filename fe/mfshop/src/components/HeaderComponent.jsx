@@ -4,9 +4,7 @@ const HeaderComponent = () => {
   const location = useLocation();
   const navigate = useNavigate(); 
   const user = JSON.parse(sessionStorage.getItem('user'));
-  console.log(user);
   const userName = user ? user.user_Name : null;
-  const cartSize = user && user.cart ? user.cart.length : 0;
   const isActiveLink = (path) => {
     return location.pathname === path ? 'active' : '';
   };
@@ -31,7 +29,7 @@ const HeaderComponent = () => {
               <div className="header__top__links">
             {user ? (
               <>
-                <a href="/profile">{userName}</a>
+                <a href="/myprofile">{userName}</a>
                 <a href="#" onClick={handleSignOut}>Sign out</a>
               </>
             ) : (
@@ -81,7 +79,9 @@ const HeaderComponent = () => {
             <div className="header__nav__option">
               <a href="#" className="search-switch"><img src="/img/icon/search.png" alt="" /></a>
               <a href="#"><img src="/img/icon/heart.png" alt="" /></a>
-              <a href="/cart"><img src="/img/icon/cart.png" alt="" /> <span>{cartSize}</span></a>
+              <a href="/cart"><img src="/img/icon/cart.png" alt="" /> <span>
+              {/* {cartSize} */}
+              </span></a>
             </div>
           </div>
         </div>

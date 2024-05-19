@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { listbsProduct, listnewProduct } from '../services/ProductService';
+import { addToCart } from '../services/CartService';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Home = () => {
@@ -10,6 +12,8 @@ const Home = () => {
     const [addToCartError, setAddToCartError] = useState(null);
     const [filterState, setFilterState] = useState('new-arrivals');
     const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const filteredProducts = filterState === 'new-arrivals' ? newProducts : bestSellerProducts;
+    const user = JSON.parse(sessionStorage.getItem('user'));
 
     useEffect(() => {
         const endTime = new Date();
@@ -74,10 +78,35 @@ const Home = () => {
         }
     }, [addToCartError]);
 
-    const filteredProducts = filterState === 'new-arrivals' ? newProducts : bestSellerProducts;
+    const handleAddToCart = async (itemId) => {
+        try {
+          await addToCart(user.id, itemId, 1);
+          toast.success(`Đã thêm sản phẩm vào giỏ hàng`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } catch (error) {
+          console.error('Error add to cart item:', error);
+          toast.error(`Lỗi khi thêm sản phẩm vào giỏ hàng`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      };
 
     return (
         <div>
+        <ToastContainer />
             {/* Check for global errors */}
             {error && <div dangerouslySetInnerHTML={{ __html: `swal("Lỗi", "${error}", "error");` }} />}
 
@@ -129,7 +158,7 @@ const Home = () => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href={`/productDetail/${product.id}`}>
+                                                <a href={`/productdetail/${product.id}`}>
                                                     <img src="img/icon/search.png" alt="" />
                                                 </a>
                                             </li>
@@ -138,12 +167,12 @@ const Home = () => {
                                     <div className="product__item__text">
                                         <h6>{product.product_Name}</h6>
                                         <a
-                                            href={`/addToCart/${product.id}`}
+                                            onClick={() => handleAddToCart(product.id)}
                                             style={{ cursor: 'pointer' }}
-                                            className="add-cart"
-                                        >
+                                             className="add-cart text-danger"
+                                                >
                                             + Add To Cart
-                                        </a>
+                                         </a>
                                         <div className="rating">
                                             <i className="fa fa-star-o" />
                                             <i className="fa fa-star-o" />

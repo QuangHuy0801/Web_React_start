@@ -12,6 +12,9 @@ import SignUp from './components/SignUp';
 import MyProfile from './components/MyProfile';
 import History from './components/History';
 import Cart from './components/Cart';
+import Checkout from './components/CheckOut';
+import Invoice from './components/Invoice';
+import ProductDetail from './components/ProductDetail';
 
 function App() {
   return (
@@ -23,7 +26,8 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const isSignInPage = location.pathname === '/signin' || location.pathname === '/signup';
+  const isInvoicePage = location.pathname.startsWith('/invoice/');
+  const isSignInPage = location.pathname === '/signin' || location.pathname === '/signup'|| isInvoicePage;
 
   return (
     <>
@@ -32,6 +36,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/category/:categoryId" element={<Shop />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
@@ -40,6 +45,9 @@ function AppContent() {
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/myhistory" element={<History />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/invoice/:index" element={<Invoice />} />
+        <Route path="/productdetail/:id" element={<ProductDetail />} />
       </Routes>
       {!isSignInPage && <FooterComponent />}
     </>

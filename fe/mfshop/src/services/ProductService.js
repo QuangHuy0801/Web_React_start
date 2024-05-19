@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:8080/api/product";
 const newProductAPI = "/newproduct";
 export const listnewProduct = () => axios.get(`${BASE_URL}${newProductAPI}`);
 const blProductAPI = "/bestsellers";
@@ -11,3 +11,7 @@ export const listProductSearch = (searchContent) => {
     const url = `${BASE_URL}${SearchAPI}?searchContent=${searchContent}`;
     return axios.get(url);
 };
+const ProductById = "/product";
+export const getProductById = (id) => axios.get(`${BASE_URL}${ProductById}/${id}`);
+const ProductDetail = "/productDetail";
+export const productdetail = (id) => axios.get(`${BASE_URL}${ProductDetail}/${id}`);

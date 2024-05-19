@@ -35,8 +35,8 @@ function SignUp() {
         window.location.href = "/signin";
       }, 3000);
     } catch (error) {
-      console.error('Sign-up failed:', error.response.data);
-      setErrorSignUp(error.response.data.message || 'An error occurred during sign-up.');
+      console.error('Sign-up failed:', error);
+      setErrorSignUp(`Sign-up failed: ${error.message}`);
     }
   };
 
